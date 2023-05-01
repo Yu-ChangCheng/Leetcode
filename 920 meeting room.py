@@ -27,4 +27,6 @@ class Solution:
         for i in intervals[1:]:
             if i.start < lastEnd:
                 return False
+            else:
+                lastEnd = i.end
         return True
