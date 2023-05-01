@@ -1,17 +1,30 @@
-class Solution(object):
-    def eraseOverlapIntervals(self, intervals):
-        """
-        :type intervals: List[List[int]]
-        :rtype: int
-        """
-        res = 0
-        intervals.sort()
-        lastEnd = intervals[0][1]
+from typing import (
+    List,
+)
+from lintcode import (
+    Interval,
+)
 
-        for start, end in intervals[1:]:
-            if start >= lastEnd:
-                lastEnd = end
-            else:
-                res += 1
-                lastEnd = min(end, lastEnd)
-        return res
+"""
+Definition of Interval:
+class Interval(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+"""
+
+class Solution:
+    """
+    @param intervals: an array of meeting time intervals
+    @return: if a person could attend all meetings
+    """
+    def can_attend_meetings(self, intervals: List[Interval]) -> bool:
+        if len(intervals) ==0:
+            return True
+        intervals.sort(key=lambda i:i.start)
+        lastEnd = intervals[0].end
+
+        for i in intervals[1:]:
+            if i.start < lastEnd:
+                return False
+        return True
