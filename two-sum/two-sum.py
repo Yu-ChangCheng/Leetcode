@@ -5,10 +5,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        seen = {}
-        for index, value in enumerate(nums):
-            key = target - value
-            if key in seen:
-                return [seen[key], index]
+        hashmap = defaultdict(int)
+        for i, n in enumerate(nums):
+            complement = target - n
+            if complement not in hashmap:
+                hashmap[n] = i
             else:
-                seen[value] = index
+                return [hashmap[complement], i]
