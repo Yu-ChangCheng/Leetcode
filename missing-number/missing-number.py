@@ -4,6 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        total = sum(range(len(nums)+1))
+        n = len(nums)
+        total = (n*(n+1))//2
         nums_total =sum(nums)
         return total-nums_total
