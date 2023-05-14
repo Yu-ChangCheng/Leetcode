@@ -8,7 +8,7 @@ class Solution(object):
             return 0
         elif len(s) == 1:
             return 1
-        'abcbc'
+
         charSet = set()
         l = 0
         res = 0
