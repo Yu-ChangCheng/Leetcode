@@ -25,4 +25,4 @@ class Solution(object):
             tail.next = list1
         elif list1==None and list2 !=None:
             tail.next = list2
-        return dummy.next
+        return dummy.next 
