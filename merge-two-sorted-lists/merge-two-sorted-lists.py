@@ -12,7 +12,6 @@ class Solution(object):
         """
         dummy = ListNode()
         tail = dummy
-
         while list1 and list2:
             if list1.val < list2.val:
                 tail.next = list1
@@ -20,11 +19,16 @@ class Solution(object):
             else:
                 tail.next = list2
                 list2 = list2.next
+            # remember to update tail
             tail = tail.next
-
-        if list1:
-            tail.next = list1
-        elif list2:
+        
+        if not list1 and list2:
             tail.next = list2
+        
+        if not list2 and list1:
+            tail.next = list1
+        
+        return dummy.next # remember to return the head
+        
 
-        return dummy.next
+            
