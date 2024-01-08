@@ -12,4 +12,5 @@ class Solution(object):
                 seen.add(i)
             else:
                 return True
+        
         return False
