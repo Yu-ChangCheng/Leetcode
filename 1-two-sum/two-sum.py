@@ -7,9 +7,9 @@ class Solution(object):
         """
         hashmap = defaultdict(int)
 
-        for i, n in enumerate(nums):
-            complement = target - n
-            if complement in hashmap:
-                return [hashmap[complement], i]
-            hashmap[n] = i
-        
+        for i in range(len(nums)):
+            complement = target - nums[i]
+            if complement not in hashmap:
+                hashmap[nums[i]] = i
+            else:
+                return [i, hashmap[complement]]
