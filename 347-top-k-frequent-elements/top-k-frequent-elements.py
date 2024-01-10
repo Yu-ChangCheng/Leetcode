@@ -11,7 +11,7 @@ class Solution(object):
         for n in nums:
             count[n] += 1
         
-        for n, c in count.items():
+        for n, c in count.items(): # note: count.items()
             freq[c].append(n)
         
         res = []
