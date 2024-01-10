@@ -6,17 +6,17 @@ class Solution(object):
         :rtype: List[int]
         """
         count = defaultdict(int)
-        freq = [[] for i in range(len(nums) + 1)]
+        freq = [[] for i in range(len(nums)+1)]
 
         for n in nums:
             count[n] += 1
         
-        for n, c in count.items(): # note: count.items()
+        for n, c in count.items():
             freq[c].append(n)
         
         res = []
-        for i in range(len(freq)-1, 0, -1):
+        for i in range(len(freq) - 1, 0 , -1):
             for n in freq[i]:
-                res.append(n)
-                if len(res) == k:
-                    return res
+               res.append(n)
+               if len(res) == k:
+                   return res 
