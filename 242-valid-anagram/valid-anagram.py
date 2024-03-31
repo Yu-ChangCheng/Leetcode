@@ -5,18 +5,17 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-
-        if len(s) != len(t):
+        if len(s)!= len(t):
             return False
         
-        s_set = defaultdict(int)
-
-        for i in s:
-            s_set[i] += 1
+        s_dict = defaultdict(int)
+        for c in s:
+            s_dict[c] += 1
         
-        for i in t:
-            if i not in s_set or s_set[i]<=0:
+        for c in t:
+            if c not in s_dict or s_dict[c] <=0:
                 return False
             else:
-                s_set[i] -=1
+                s_dict[c] -= 1
         return True
+
