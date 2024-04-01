@@ -4,10 +4,7 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        # iterate over the list for the string 
-        # use count (ord)
-        # return values
-
+        
         res = defaultdict(list)
         for s in strs:
             count = [0] * 26
