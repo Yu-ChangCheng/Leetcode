@@ -5,18 +5,25 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        count = defaultdict(int)
-        freq = [[] for i in range(len(nums)+1)]
 
+        # freq = 
+        #[[1][2][3][4][5][6]]
+        #[[3][2][1][0][0][0]]
+
+        freq = [[] for i in range(len(nums) + 1)]
+        count = defaultdict(int)
+        
         for n in nums:
             count[n] += 1
-        
-        for n, c in count.items():
-            freq[c].append(n)
-        
+        for i, value in count.items():
+            freq[value].append(i)
+
         res = []
-        for i in range(len(freq) - 1, 0 , -1):
-            for n in freq[i]:
-               res.append(n)
-               if len(res) == k:
-                   return res 
+        for n in range(len(freq)-1, 0, -1):
+            for c in freq[n]:
+                res.append(c)
+                if len(res) == k:
+                    return res
+
+
+
