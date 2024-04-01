@@ -5,7 +5,7 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if len(s)!= len(t):
+        if len(s) != len(t):
             return False
         
         s_dict = defaultdict(int)
@@ -18,4 +18,3 @@ class Solution(object):
             else:
                 s_dict[c] -= 1
         return True
-
