@@ -8,19 +8,22 @@ class Solution(object):
         nums.sort()
 
         for i, a in enumerate(nums):
-            if i > 0 and nums[i-1] == a:
+            if i > 0 and a == nums[i-1]:
                 continue
             l = i + 1
             r = len(nums) - 1
+            
             while l < r:
-                ThreeSum = a + nums[l] + nums[r]
-                if ThreeSum > 0 :
+                three_sum = a + nums[l] + nums[r]
+                if three_sum > 0 :
                     r -= 1
-                elif ThreeSum < 0:
+                elif three_sum < 0:
                     l += 1
                 else:
-                    res.append([a, nums[l], nums[r]])
+                    res.append([a,nums[l],nums[r]])
                     l += 1
-                    while l < r and nums[l] == nums[l - 1]:
+                    while l < r and nums[l] == nums[l-1]:
                         l += 1
+                    
         return res
+
