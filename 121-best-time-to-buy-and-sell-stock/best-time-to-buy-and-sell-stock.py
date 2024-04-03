@@ -11,7 +11,7 @@ class Solution(object):
         r = 1
         max_profit = 0
 
-        while r < len(prices) :
+        while r <= len(prices) - 1 :
             if prices[l] < prices[r]:
                 max_profit = max(max_profit, prices[r] - prices[l])
                 r += 1     
