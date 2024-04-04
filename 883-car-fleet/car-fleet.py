@@ -6,16 +6,16 @@ class Solution(object):
         :type speed: List[int]
         :rtype: int
         """
-        pairs = [(p,s) for p,s in zip(position, speed)]
-        s_pairs = sorted(pairs)[::-1]
+        pair = [(p,s) for p,s in zip(position,speed)]
+        s_pair = sorted(pair)[::-1]
 
-        prev_t = None
+        pre_t = None
         count = 0
 
-        for position, speed in s_pairs:
+        for position, speed in s_pair:
             dist = target - position
-            t = dist/float(speed)
-            if not prev_t or t > prev_t:
-                prev_t = t
+            t = float(dist) / speed
+            if not pre_t or t > pre_t:
+                pre_t = t
                 count += 1
         return count
