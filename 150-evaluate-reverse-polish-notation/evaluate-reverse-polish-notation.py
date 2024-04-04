@@ -5,20 +5,18 @@ class Solution(object):
         :rtype: int
         """
         stack = []
-        for token in tokens:
-            if token not in "+-*/":
-                stack.append(int(token))
+        for c in tokens:
+            if c not in "+-*/":
+                stack.append(int(c))
             else:
                 a = stack.pop()
                 b = stack.pop()
-                if token == "+":
+                if c == "+":
                     stack.append(b + a)
-                elif token == "-":
+                elif c == "-":
                     stack.append(b - a)
-                elif token == "*":
+                elif c == "*":
                     stack.append(b * a)
-                elif token == "/":
-                    # Use integer division that rounds towards negative infinity
-                    # This handles negative numbers more consistently
-                    stack.append(int(float(b) / a)) 
-        return stack.pop()
+                elif c == "/":
+                    stack.append(int(float(b)/a))
+        return stack[-1]
