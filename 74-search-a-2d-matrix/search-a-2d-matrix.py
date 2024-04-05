@@ -5,14 +5,15 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        ROWS, COLS = len(matrix), len(matrix[0])
+        ROWS = len(matrix)
+        COLS = len(matrix[0])
         TOP = 0
         BOTTOM = ROWS - 1
-        l = 0
+        l = 0 
         r = COLS - 1
 
         while TOP <= BOTTOM:
-            MID = (TOP+BOTTOM) // 2
+            MID = (TOP + BOTTOM) // 2
             if matrix[MID][0] > target:
                 BOTTOM = MID - 1
             elif matrix[MID][-1] < target:
@@ -20,19 +21,15 @@ class Solution(object):
             else:
                 break
         
-        if not (TOP <= BOTTOM):
+        if TOP > BOTTOM:
             return False
-
+        
         while l <= r:
-            mid = (l + r) // 2
-            if matrix[MID][mid] < target:
-                l = mid + 1
-            elif matrix[MID][mid] > target:
-                r = mid - 1
+            m = (l+r) // 2 
+            if matrix[MID][m] > target:
+                r = m - 1
+            elif matrix[MID][m] < target:
+                l = m + 1
             else:
                 return True
-        
         return False
-
-
-
