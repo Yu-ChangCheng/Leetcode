@@ -11,13 +11,10 @@ class Solution(object):
         """
         prev = None
         curr = head
-        while curr:
-            temp = curr.next
-            curr.next = prev
-            prev = curr
-            curr = temp
-        return prev
-             
 
-        
-            
+        while curr:
+            temp = curr.next #(2) (3)
+            curr.next = prev #(->None) (->1)
+            prev = curr #(None to 1) (2)
+            curr = temp #(2) (3)
+        return prev
