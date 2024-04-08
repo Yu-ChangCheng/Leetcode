@@ -10,18 +10,26 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        dummy = ListNode(next = head)
-        left = dummy
-        right = dummy.next
+        #    [1,2,3,4,5]
+        #.   l . r           n = 2
 
-        while n > 0 and right:
-            right = right.next
+        # First to have two pointers with interval n
+        Dummy = ListNode(next = head)
+
+        slow = Dummy
+        fast = head
+
+        while n > 0 and fast:
+            fast = fast.next
             n -= 1
         
-        while right:
-            left = left.next
-            right = right.next
+        # Remember to move the fast pointer just by one in here as we want to keep distance n
+        while fast:
+            slow = slow.next
+            fast = fast.next
         
-        left.next = left.next.next
+        slow.next = slow.next.next
 
-        return dummy.next
+        return Dummy.next
+
+
