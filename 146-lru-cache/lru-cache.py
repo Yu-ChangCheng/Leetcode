@@ -1,7 +1,7 @@
 class Node():
-    def __init__(self, key, value):
+    def __init__(self, key = 0, val = 0):
         self.key = key
-        self.val = value
+        self.val = val
         self.next = None
         self.prev = None
 
@@ -11,38 +11,38 @@ class LRUCache(object):
         """
         :type capacity: int
         """
-        self.cache = {}
-        self.cap = capacity
+        self.hashmap = {}
+        self.capacity = capacity
         self.head = Node(0,0)
         self.tail = Node(0,0)
         self.head.next = self.tail
         self.tail.prev = self.head
 
-    # head (P) -> node <- tail
     def remove(self, node):
-        p = node.prev
-        p.next = node.next
-        node.next.prev = p
-    
-    # head (P) -> node -> tail
-    def insert(self, node):
-        p = self.tail.prev
-        p.next = node
-        node.next = self.tail
-        self.tail.prev = node
-        node.prev = p
+        p_prev = node.prev
+        p_next = node.next
+        p_prev.next = p_next
+        p_next.prev = p_prev
 
+    def insert(self, node):
+        p_prev = self.tail.prev
+        p_next = self.tail
+        p_prev.next = node
+        p_next.prev = node
+        node.next = p_next
+        node.prev = p_prev
+        
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
-        if key not in self.cache:
-            return -1
-        n = self.cache[key]
-        self.remove(n)
-        self.insert(n)
-        return n.val
+        if key in self.hashmap:
+            self.remove(self.hashmap[key])
+            self.insert(self.hashmap[key])
+            return self.hashmap[key].val
+        return -1
+
 
     def put(self, key, value):
         """
@@ -50,18 +50,19 @@ class LRUCache(object):
         :type value: int
         :rtype: None
         """
-        if key in self.cache: # shift our node to right (tail)
-            self.remove(self.cache[key])
-            del self.cache[key]
-        elif len(self.cache) == self.cap: # evict the node next to head
-            n = self.head.next
-            self.remove(n) # delete the node
-            del self.cache[n.key] # delete from the dict
-        
-        n = Node(key, value) # put the node to the prev before tail
-        self.cache[key] = n
-        self.insert(n)
-        
+        new_node = Node(key,value)
+        if key in self.hashmap:
+            self.remove(self.hashmap[key])
+            del self.hashmap[key]
+        self.hashmap[key] = new_node
+        self.insert(new_node)
+
+        if len(self.hashmap) > self.capacity:
+            lru_node = self.head.next
+            del self.hashmap[lru_node.key]
+            self.remove(lru_node)
+
+
 
 
 # Your LRUCache object will be instantiated and called as such:
