@@ -5,8 +5,6 @@ class Solution(object):
         :rtype: List[str]
         """
         path = ""
-        openN = 0
-        closeN = 0
         res = []
 
         def DFS(openN, closeN, path):
