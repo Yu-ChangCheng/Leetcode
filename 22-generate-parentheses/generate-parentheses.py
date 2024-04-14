@@ -6,18 +6,17 @@ class Solution(object):
         """
         path = ""
         openN = 0
-        closeN = 0 
+        closeN = 0
         res = []
 
         def DFS(openN, closeN, path):
             if n == openN == closeN:
                 res.append(path)
                 return
-            if n >= openN and openN >= closeN:
-                DFS(openN+1, closeN, path + "(")
 
-            if n >= closeN and closeN <= openN:
+            if n > openN and openN >= closeN:
+                 DFS(openN+1, closeN, path + "(")
+            if n > closeN and openN >= closeN:
                 DFS(openN, closeN+1, path + ")")
-        
-        DFS(0,0,path)
+        DFS(0,0,path)    
         return res
