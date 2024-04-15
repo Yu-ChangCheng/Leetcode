@@ -13,12 +13,12 @@ class Solution(object):
         :rtype: TreeNode
         """
         succ = None
+        node = root
 
-        while root:
-            if root.val <= p.val:
-                root = root.right
+        while node:
+            if node.val > p.val:
+                succ = node
+                node = node.left
             else:
-                succ = root
-                root = root.left
-        
+                node = node.right
         return succ
