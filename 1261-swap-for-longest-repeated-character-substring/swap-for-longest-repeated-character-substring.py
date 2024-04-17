@@ -27,7 +27,7 @@ class Solution(object):
             max_len = max(max_len, min(length + 1, overall_count[char]))
 
             # Check for possible merging with adjacent blocks of the same character separated by one different character
-            if i < len(blocks) - 2 and blocks[i+1][1] == 1 and blocks[i+2][0] == char:
+            if i + 2 < len(blocks) and blocks[i+1][1] == 1 and blocks[i+2][0] == char:
                 # Calculate potential new length by merging current and next same-char block
                 new_length = length + blocks[i+2][1]
                 if overall_count[char] > new_length:
