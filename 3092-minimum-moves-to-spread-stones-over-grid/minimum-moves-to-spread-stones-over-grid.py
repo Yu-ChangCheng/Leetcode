@@ -1,36 +1,40 @@
 class Solution(object):
     def __init__(self):
         self.minimum_distance = float('Inf')
-        
+
     def minimumMoves(self, grid):
         """
         :type grid: List[List[int]]
         :rtype: int
         """
-        rows, cols = len(grid), len(grid[0])
-        zero_cells = []
-        extra_stones = {}
+        row = len(grid)
+        col = len(grid[0])
+        zeros = [] # [(r, c)]
+        extra = {} # {(r, c): number of stones}
 
-        # Gather zero cells and cells with extra stones
-        for r in range(rows):
-            for c in range(cols):
+        for r in range(row):
+            for c in range(col):
                 if grid[r][c] == 0:
-                    zero_cells.append((r, c)) # [(r, c)]
+                    zeros.append((r,c))
                 elif grid[r][c] > 1:
-                    extra_stones[(r, c)] = grid[r][c] # {(r,c): number of stone}
+                    extra[(r, c)] = grid[r][c]
+        
+        def backtracking(zero_index, extra_dict, curr_distance):
+            if zero_index == len(zeros):
+                self.minimum_distance = min(self.minimum_distance, curr_distance)
+                return 
 
-        def backtrack(current_zero_index, available_stones, total_distance):
-            if current_zero_index == len(zero_cells):
-                self.minimum_distance = min(self.minimum_distance, total_distance)
-                return
-
-            current_zero = zero_cells[current_zero_index]
-            for stone_cell, count in available_stones.items():
+            zero_x, zero_y = zeros[zero_index]
+            for (extra_x, extra_y), count in extra_dict.items():
                 if count > 1:
-                    move_distance = abs(stone_cell[0] - current_zero[0]) + abs(stone_cell[1] - current_zero[1])
-                    available_stones[stone_cell] -= 1
-                    backtrack(current_zero_index + 1, available_stones, total_distance + move_distance)
-                    available_stones[stone_cell] += 1
-
-        backtrack(0, extra_stones, 0)
+                    distance = abs(zero_x - extra_x) + abs(zero_y - extra_y)
+                    extra_dict[(extra_x, extra_y)] -= 1
+                    backtracking(zero_index + 1, extra_dict, curr_distance + distance)
+                    extra_dict[(extra_x, extra_y)] += 1
+            return self.minimum_distance
+            
+        backtracking(0, extra, 0)
         return self.minimum_distance
+
+                
+        
