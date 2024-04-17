@@ -5,27 +5,27 @@ class Solution(object):
         :rtype: int
         """
         count = 0
-        if not grid: return 0
+        rows = len(grid)
+        cols = len(grid[0])
 
-        def dfs(i, j):
-            if i in range(len(grid)) and j in range(len(grid[0])):
-                if grid[i][j]!= "1":
+        def dfs(r, c):
+            if r in range(rows) and c in range(cols):
+                if grid[r][c] == "1":
+                    grid[r][c] = "#"
+                elif grid[r][c] != "1":
                     return
-                if grid[i][j] == "1":
-                    grid[i][j] = "#"
-
-                dfs(i+1, j)
-                dfs(i-1, j)
-                dfs(i, j+1)
-                dfs(i, j-1)
+                dfs(r+1,c)
+                dfs(r-1,c)
+                dfs(r,c+1)
+                dfs(r,c-1)
             return
 
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
+
+        
+
+        for r in range(rows):
+            for c in range(cols):
                 if grid[r][c] == "1":
                     count += 1
-                    dfs(r, c)
+                    dfs(r,c)
         return count
-             
-        
-    
