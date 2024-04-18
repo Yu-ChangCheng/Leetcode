@@ -5,7 +5,7 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        queue = deque([(x, 0)]) # Queue to store (current value, steps taken)
+        queue = deque([(x,0)])
         visited = set()
         visited.add(x)
 
@@ -14,7 +14,7 @@ class Solution(object):
 
             if curr == y:
                 return step
-            
+
             next_states = []
             if curr % 11 == 0:
                 next_states.append(curr // 11)
