@@ -8,13 +8,14 @@ class Solution(object):
         left = ""
         mid = ""
 
-        for n in sorted(c)[::-1]:
-            cur = n * (c[n]//2)
-            if c[n] % 2 ==0:
-                left += cur
+        for n, count in sorted(c.items())[::-1]:
+            curr_count = n * (count//2)
+            if count % 2 == 0:
+                left += curr_count
             else:
-                left += cur
-                mid = max(mid,n)
-        
-        if left: left = left.lstrip('0')
-        return (left + mid + left[::-1]) or '0'
+                left += curr_count
+                mid = max(mid, n)
+        if left: left = left.lstrip("0")
+        res = left + mid + left[::-1]
+        return  res or "0"
+
