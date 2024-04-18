@@ -1,16 +1,7 @@
-class ListNode:
-    def __init__(self, key = -1, val = -1, next = None):
-        self.key = key
-        self.val = val
-        self.next = next
-
 class MyHashMap(object):
 
     def __init__(self):
-        self.map = [ListNode() for i in range(1000)]
-
-    def hash(self, key):
-        return key % len(self.map)
+        self.map = [None] * 1000001
 
     def put(self, key, value):
         """
@@ -18,38 +9,22 @@ class MyHashMap(object):
         :type value: int
         :rtype: None
         """
-        cur = self.map[self.hash(key)] # reach to the dummy node
-        while cur.next:
-            if cur.next.key == key:
-                cur.next.val = value
-                return
-            cur = cur.next
-        cur.next = ListNode(key, value)
+        self.map[key] = value
 
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
-        cur = self.map[self.hash(key)]
-        while cur:
-            if cur.key == key:
-                return cur.val
-            cur = cur.next
-        return -1
+        val = self.map[key]
+        return val if val != None else -1
 
     def remove(self, key):
         """
         :type key: int
         :rtype: None
         """
-        cur = self.map[self.hash(key)]
-        while cur and cur.next:
-            if cur.next.key == key:
-                cur.next = cur.next.next
-                return 
-            cur = cur.next
-        
+        self.map[key] = None
 
 
 # Your MyHashMap object will be instantiated and called as such:
