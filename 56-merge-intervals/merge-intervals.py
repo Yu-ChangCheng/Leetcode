@@ -5,14 +5,13 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         intervals = sorted(intervals, key = lambda x: x[0])
-        output = [intervals[0]]
+        res = [intervals[0]]
 
-        for start, end in intervals[1:]:
-            if start <= output[-1][1]:
-                output[-1][1] = max(output[-1][1], end) # remember to use max
+        for interval in intervals[1:]:
+            if interval[0] <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], interval[1])
             else:
-                output.append([start, end])
-        return output
-
+                res.append(interval)
+        return res
         
             
