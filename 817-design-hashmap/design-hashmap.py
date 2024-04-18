@@ -10,10 +10,7 @@ class MyHashMap(object):
         :type value: int
         :rtype: None
         """
-        if key in self.hashmap:
-            self.hashmap[key] = value
-        else:
-            self.hashmap[key] = value
+        self.hashmap[key] = value
         
         
 
