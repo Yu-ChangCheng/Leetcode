@@ -4,5 +4,13 @@ class Solution(object):
         :type x: int
         :rtype: bool
         """
-        return str(x) == str(x)[::-1]
+        if x < 0: return False
+
+        x_copy = x
+        res = 0
+        while x_copy:
+            res = res * 10 + x_copy % 10
+            x_copy = x_copy // 10
+
+        return res == x
 
