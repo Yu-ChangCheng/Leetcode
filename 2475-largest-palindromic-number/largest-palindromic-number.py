@@ -9,13 +9,14 @@ class Solution(object):
         mid = ""
 
         for n, count in sorted(c.items())[::-1]:
-            curr_count = n * (count//2)
-            if count % 2 == 0:
-                left += curr_count
-            else:
-                left += curr_count
-                mid = max(mid, n)
-        if left: left = left.lstrip("0")
+            curr_num = n * (count//2)
+            if count % 2 != 0 and mid == "":
+                mid = n
+            left += curr_num
+
+        if left: left = left.lstrip('0')
         res = left + mid + left[::-1]
-        return  res or "0"
+        return res or "0"
+
+
 
