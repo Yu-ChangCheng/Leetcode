@@ -20,4 +20,6 @@ class Solution(object):
             elif curr.val > p.val and curr.val > q.val:
                 curr = curr.left
             else:
-                return curr
+                return curr 
+                
+        
