@@ -26,9 +26,9 @@ class Solution(object):
         if not p and not q:
             return True
             
-        if not q and p or not p and q or p.val != q.val:
+        elif not q and p or not p and q or p.val != q.val:
             return False
 
         left = self.isSameTree(p.left, q.left)
         right = self.isSameTree(p.right, q.right)
-        return left and right and p.val == q.val
+        return left and right
