@@ -9,11 +9,20 @@ class Solution(object):
         :rtype: int
         """
 
-        dp = [amount + 1] * (amount + 1)
-        dp[0] = 0
+        q = deque([(amount, 0)])
 
-        for a in range(1, amount + 1):
+        visited = set()
+        while q:
+            cur , n_coins = q.popleft()
+            if cur == 0:
+                return n_coins
+            
             for c in coins:
-                if (a-c) >= 0:
-                    dp[a] = min(dp[a], 1 + dp[a - c])
-        return dp[amount] if dp[amount] != amount + 1 else -1
+                new_cur = cur - c
+
+                if new_cur in visited or new_cur < 0:
+                    continue
+                
+                q.append((new_cur, n_coins + 1))
+                visited.add(new_cur)
+        return -1
