@@ -4,11 +4,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        
-        
-        res =[]
+        res = []
         nums.sort()
-
+        
         for i, a in enumerate(nums):
             if i > 0 and a == nums[i-1]:
                 continue
@@ -21,8 +19,8 @@ class Solution(object):
                 elif three_sum < 0:
                     l += 1
                 else:
-                    res.append([a , nums[l] , nums[r]])
+                    res.append([a, nums[l], nums[r]])
                     l += 1
-                    while l < r and nums[l] == nums[l - 1]:
+                    while l < r and nums[l] == nums[l-1]:
                         l += 1
-        return res  
+        return res
