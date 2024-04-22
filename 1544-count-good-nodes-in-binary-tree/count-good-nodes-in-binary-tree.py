@@ -10,6 +10,8 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+
+        '''
         res = 0
         maxVal = root.val
         q = deque([[root, maxVal]]) # storage the maxVal so far
@@ -27,7 +29,18 @@ class Solution(object):
 
                     
         return res
-                    
+        '''
+        self.res = 0
 
+        def dfs(node, maxVal):
+            if not node:
+                return
+            if node.val >= maxVal:
+                self.res += 1
 
+            dfs(node.left, max(node.val, maxVal))
+            dfs(node.right, max(node.val, maxVal))
+            return
+        dfs(root,root.val)
+        return self.res
         
