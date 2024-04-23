@@ -4,6 +4,8 @@ class Solution(object):
         :type stones: List[int]
         :rtype: int
         """
+
+        '''
         if not stones:
             return 0
         if len(stones) == 1:
@@ -16,6 +18,16 @@ class Solution(object):
             new_stone = abs(stone_a - stone_b)
             stones.append(new_stone)
             
-        
         return stones[0]
         
+        '''
+        stones = [-s for s in stones]
+        heapq.heapify(stones)
+ 
+        while len(stones) > 1:
+            first, second = heapq.heappop(stones), heapq.heappop(stones)
+
+            diff = - abs(first-second)
+            heapq.heappush(stones, diff)
+        
+        return abs(stones[0])
