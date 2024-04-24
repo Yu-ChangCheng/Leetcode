@@ -16,10 +16,10 @@ class Solution(object):
         return start_value
         '''
         prefix_sum = 0
-        min_start_value = 1
+        min_start_value = 0
 
         for num in nums:
             prefix_sum += num
-            min_start_value = max(min_start_value, 1 - prefix_sum)
-        return min_start_value
+            min_start_value = min(min_start_value, prefix_sum)
+        return -min_start_value + 1
         
