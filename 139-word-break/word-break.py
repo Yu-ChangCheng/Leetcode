@@ -5,7 +5,6 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
-        from collections import deque
         q = deque([s])
         seen = set()
         while q:
@@ -15,7 +14,8 @@ class Solution(object):
                     new_s = s[len(word):]
                     if new_s == "":
                         return True
-                    if new_s not in seen:
-                        q.append(new_s)
-                        seen.add(new_s)
+                    else:
+                        if new_s not in seen:
+                            q.append(new_s)
+                            seen.add(new_s)
         return False
