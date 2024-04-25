@@ -5,22 +5,21 @@ class Solution(object):
         :type y: int
         :rtype: int
         """
-        queue = deque([[x, 0]])
+        queue = deque([[x, 0]]) # [current, step]
         visited = set()
         visited.add(x)
+
         while queue:
             curr, step = queue.popleft()
+            next_states = []
             if curr == y:
                 return step
-
-            next_states = []
             if curr % 11 == 0:
-                next_states.append(curr//11)
+                next_states.append(curr/11)
             if curr % 5 == 0:
-                next_states.append(curr//5)
+                next_states.append(curr/5)
             next_states.append(curr - 1)
             next_states.append(curr + 1)
-        
             for next_state in next_states:
                 if next_state not in visited:
                     visited.add(next_state)
