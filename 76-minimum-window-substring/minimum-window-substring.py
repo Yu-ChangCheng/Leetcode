@@ -5,30 +5,30 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        if not s or not t or len(s) < len(t): return ''
-        countT = defaultdict(int)
-        window = defaultdict(int)
+        if not s or not t or len(s) < len(t):
+            return ""
+        dict_t = Counter(t)
+        mini_len = float('Inf')
+        mini_string = ""
+        matched = 0
+        start = 0
 
-        for c in t:
-            countT[c] += 1
-        
-        have = 0
-        need = len(countT)
-        res, resLen = [-1, -1], float('infinity')
+        for end in range(len(s)):
+            if s[end] in dict_t:
+                dict_t[s[end]] -= 1
+                if dict_t[s[end]] == 0:
+                    matched += 1
 
-        l = 0
-        for r in range(len(s)):
-            window[s[r]] += 1
-            if s[r] in countT and window[s[r]] == countT[s[r]]:
-                have += 1
-            while have == need:
-                if (r - l + 1) < resLen:
-                    res = [l, r]
-                    resLen = (r - l + 1)
-                window[s[l]] -= 1
-                if s[l] in countT and window[s[l]] < countT[s[l]]:
-                    have -= 1
-                l += 1
-        l, r = res
-        return s[l:r+1]    
-                
+            while matched == len(dict_t) and start <= end:
+                curr_len = end - start + 1
+                if curr_len < mini_len:
+                    mini_len = curr_len
+                    mini_string = s[start: end + 1]
+
+                if s[start] in dict_t:
+                    if dict_t[s[start]] == 0:
+                        matched -= 1
+                    dict_t[s[start]] += 1
+                start += 1
+        return mini_string
+
