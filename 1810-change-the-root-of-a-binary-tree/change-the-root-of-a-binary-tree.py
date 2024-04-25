@@ -21,22 +21,19 @@ class Solution(object):
         #     ')'
         #    )
         
-        cur = leaf
+        curr = leaf
         prev = None
-        while cur:
-            if cur.right == prev:
-                if cur == root:
-                    cur.right = None
-                    cur.parent = prev
-                    # print(cur)
+
+        while curr:
+            if curr.right == prev:
+                if curr == root:
+                    curr.right = None
+                    curr.parent = prev
                     break
-                elif cur.left:
-                    cur.right = cur.left
-            cur.left = cur.parent
-            cur.parent = prev
-            prev = cur
-            print(cur)
-            cur = cur.left
-        # print('')
+                elif curr.left:
+                    curr.right = curr.left
+            curr.left = curr.parent
+            curr.parent = prev
+            prev = curr
+            curr = curr.left
         return leaf
-            
