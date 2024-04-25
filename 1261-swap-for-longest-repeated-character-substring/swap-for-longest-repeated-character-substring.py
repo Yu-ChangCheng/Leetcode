@@ -4,28 +4,63 @@ class Solution(object):
         :type text: str
         :rtype: int
         """
-        blocks = [] # [(a,3), (b,1), (a,3)]
-        count = Counter(text) # {a:6, b:1}
-        maxLength = 0
-        
+        blocks = []
         i = 0
-        while i < len(text):
+        n = len(text)
+        while i < n:
             start = i
-            while i < len(text) and text[start] == text[i]:
+            while i < n and text[i] == text[start]:
                 i += 1
-            blocks.append((text[start], i - start))
+            length = i - start
+            blocks.append((text[start], length))
+        
+        overall_count = Counter(text)
+        max_len = 0
+
+        for i in range(len(blocks)):
+            char, length = blocks[i]
+            max_len = max(max_len, min(length+1, overall_count[char]))
+
+            if i + 2 < len(blocks) and blocks[i+1][1] == 1 and blocks[i+2][0] == char:
+                sum_length = length + blocks[i+2][1]
+                if sum_length < overall_count[char]:
+                    sum_length += 1
+                max_len = max(max_len, sum_length)
+
+        return max_len
+            
+'''
+        # Collecting blocks of consecutive characters
+        blocks = [] #[[a,3]]
+        i = 0
+        n = len(text)
+
+        while i < n:
+            start = i
+            while i < n and text[i] == text[start]:
+                i += 1
+            length = i - start
+            blocks.append((text[start], length))
+
+        # Count total occurrences of each character
+        overall_count = Counter(text)
+        max_len = 0
 
         # Evaluate each block to maximize the repeated substring
         for i in range(len(blocks)):
-            maxLength = max(maxLength, min(blocks[i][1] + 1, count[blocks[i][0]]))
+            char, length = blocks[i]
+            # Try to extend this block by 1, limited by the total count of the character
+            max_len = max(max_len, min(length + 1, overall_count[char]))
 
-            if i + 2 < len(blocks) and blocks[i+1][1] == 1 and blocks[i+2][0] == blocks[i][0]:
-                currLength = blocks[i][1] + blocks[i+2][1]
-                if currLength < count[blocks[i][0]]:
-                    currLength += 1
-                maxLength = max(currLength, maxLength)
-            
-        return maxLength
+            # Check for possible merging with adjacent blocks of the same character separated by one different character
+            if i + 2 < len(blocks) and blocks[i+1][1] == 1 and blocks[i+2][0] == char:
+                # Calculate potential new length by merging current and next same-char block
+                new_length = length + blocks[i+2][1]
+                if overall_count[char] > new_length:
+                    new_length += 1  # Check if there's at least one more 'char' to swap in
+                max_len = max(max_len, new_length)
 
+        return max_len
+'''
         
         
