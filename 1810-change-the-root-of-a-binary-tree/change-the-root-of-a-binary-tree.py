@@ -21,19 +21,23 @@ class Solution(object):
         #     ')'
         #    )
         
-        curr = leaf
-        prev = None
-
-        while curr:
-            if curr.right == prev:
-                if curr == root:
-                    curr.right = None
-                    curr.parent = prev
-                    break
-                elif curr.left:
-                    curr.right = curr.left
-            curr.left = curr.parent
-            curr.parent = prev
-            prev = curr
-            curr = curr.left
+        # From leaf to root, for each node
+        # moves left subtree to right if it exists
+        # makes parent node become its left child
+        # updates node.parent and breaks the pointer in its parent node to itself
+        # Time Complexity O(H) H: the depth from root to leaf
+        node, parent = leaf, None
+        while node != root:
+            if node.left:
+                node.right = node.left
+                
+            node.left, node.parent = node.parent, parent
+            parent, node = node, node.left
+            
+            if node.left == parent:
+                node.left = None
+            else:
+                node.right = None
+        
+        root.parent = parent
         return leaf
