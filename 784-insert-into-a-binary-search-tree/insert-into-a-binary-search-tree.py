@@ -11,22 +11,24 @@ class Solution(object):
         :type val: int
         :rtype: TreeNode
         """
-        if not root:
-            return TreeNode(val)
-
-        curr = root 
-        while True:
-            if curr.val > val:  # 4 > 5 (x) / 7 > 5 yes
-                if not curr.left: #         / yes
-                    curr.left = TreeNode(val) # / insert 5 
+        node = root
+        if not node:
+            return TreeNode(val = val)
+            
+        while node:
+            if node.val > val:
+                if not node.left:
+                    node.left = TreeNode(val = val)
                     break
-                curr = curr.left
+                else:
+                    node = node.left
             else:
-                if not curr.right: # (x)
-                    curr.right = TreeNode(val)
+                if not node.right:
+                    node.right = TreeNode(val = val)
                     break
-                curr = curr.right # curr = 7
-        return root
-             
+                else:
+                    node = node.right
 
+        return root
         
+            
