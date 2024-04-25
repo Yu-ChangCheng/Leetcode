@@ -4,19 +4,21 @@ class Solution(object):
         :type num: str
         :rtype: str
         """
-        c = Counter(num)
+        counts = Counter(num) # {"9": 3}
+        list_counts = sorted([[value, count] for value, count in counts.items()], key = lambda x: x[0])[::-1]
         left = ""
         mid = ""
 
-        for n, count in sorted(c.items())[::-1]:
-            curr_num = n * (count//2)
-            if count % 2 != 0 and mid == "":
-                mid = n
-            left += curr_num
-
-        if left: left = left.lstrip('0')
-        res = left + mid + left[::-1]
-        return res or "0"
-
-
-
+        for value, count in list_counts:
+            curr_c = value * (count // 2)
+            if count % 2 == 0:
+                left += curr_c
+            else:
+                left += curr_c
+                mid = max(mid, value)
+        left = left.lstrip('0')
+        if left + mid + left[::-1]:
+            return left + mid + left[::-1]
+        else:
+            return "0"
+        
