@@ -16,4 +16,6 @@ class Solution(object):
         # sum + m * k - m = k * min + k * m (i + ii)
         # sum - m = k * min
         # m = sum - k * min
-        return sum(nums) - (len(nums) * min(nums))
+        return sum(nums) - len(nums) * min(nums)
+
+        
