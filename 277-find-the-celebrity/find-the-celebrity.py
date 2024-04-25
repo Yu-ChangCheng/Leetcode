@@ -17,7 +17,9 @@ class Solution(object):
 
         if any(knows(c, i) for i in range(c)):
             return -1
-
+        
         if any(not knows(i, c) for i in range(n)):
             return -1
         return c
+
+        
