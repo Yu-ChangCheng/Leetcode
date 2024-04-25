@@ -1,5 +1,5 @@
-class ListNode:
-    def __init__(self, key, val):
+class Node():
+    def __init__(self, key = 0, val = 0):
         self.key = key
         self.val = val
         self.next = None
@@ -12,58 +12,57 @@ class LRUCache(object):
         :type capacity: int
         """
         self.hashmap = {}
-        self.cap = capacity
-        self.head = ListNode(0, 0)
-        self.tail = ListNode(0, 0)
+        self.capacity = capacity
+        self.head = Node(0,0)
+        self.tail = Node(0,0)
         self.head.next = self.tail
         self.tail.prev = self.head
 
+    def remove(self, node):
+        p_prev = node.prev
+        p_next = node.next
+        p_prev.next = p_next
+        p_next.prev = p_prev
+
+    def insert(self, node):
+        p_prev = self.tail.prev
+        p_next = self.tail
+        p_prev.next = node
+        p_next.prev = node
+        node.next = p_next
+        node.prev = p_prev
+        
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
         if key in self.hashmap:
-            self.remove_from_head(self.hashmap[key])
-            self.insert_to_tail(self.hashmap[key])
+            self.remove(self.hashmap[key])
+            self.insert(self.hashmap[key])
             return self.hashmap[key].val
         return -1
 
-    def remove_from_head(self, node):
-        node_prev = node.prev
-        node_next = node.next
-        node_prev.next = node.next
-        node_next.prev = node_prev
-    
-    def insert_to_tail(self, node):
-        dummy = self.tail.prev
-        dummy.next = node
-        node.next = self.tail
-        node.prev = dummy
-        self.tail.prev = node
-        
+
     def put(self, key, value):
         """
         :type key: int
         :type value: int
         :rtype: None
         """
-        newNode = ListNode(key, value)
+        new_node = Node(key,value)
         if key in self.hashmap:
-            oldNode = self.hashmap[key] 
-            self.remove_from_head(oldNode)
-            del oldNode
+            self.remove(self.hashmap[key])
+            del self.hashmap[key]
+        self.hashmap[key] = new_node
+        self.insert(new_node)
 
-        self.hashmap[key] = newNode
-        self.insert_to_tail(newNode)
-
-        if len(self.hashmap) > self.cap:
-            LRU = self.head.next
-            self.remove_from_head(LRU)
-            del self.hashmap[LRU.key]
+        if len(self.hashmap) > self.capacity:
+            lru_node = self.head.next
+            del self.hashmap[lru_node.key]
+            self.remove(lru_node)
 
 
-        
 
 
 # Your LRUCache object will be instantiated and called as such:
