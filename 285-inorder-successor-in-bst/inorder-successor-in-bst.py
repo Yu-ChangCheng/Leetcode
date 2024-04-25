@@ -14,7 +14,6 @@ class Solution(object):
         """
         succ = None
         node = root
-
         while node:
             if node.val > p.val:
                 succ = node
