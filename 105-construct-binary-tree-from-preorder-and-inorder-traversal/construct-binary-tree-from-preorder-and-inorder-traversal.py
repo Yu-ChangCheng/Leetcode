@@ -16,6 +16,4 @@ class Solution(object):
             root = TreeNode(inorder[INDEX])
             root.left = self.buildTree(preorder, inorder[:INDEX])
             root.right = self.buildTree(preorder, inorder[INDEX+1:])
-
             return root
-            
