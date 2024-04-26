@@ -15,6 +15,8 @@ class Solution(object):
         for ind, val in enumerate(inorder):
             dict_inorder[val] = ind
 
+        
+
         if inorder:
             m_value = preorder.pop(0)
             INDEX = dict_inorder[m_value]
