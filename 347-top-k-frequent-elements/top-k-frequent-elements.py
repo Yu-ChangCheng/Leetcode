@@ -5,10 +5,10 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-
+        # Bucket Sort
         # freq = 
-        #[[1][2][3][4][5][6]]
-        #[[3][2][1][0][0][0]]
+        #[[1][2][3][4][5][6]] count
+        #[[3][2][1][0][0][0]] num
 
         count = defaultdict(int)
         freq = [[] for i in range(len(nums) + 1)]
