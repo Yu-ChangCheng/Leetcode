@@ -15,12 +15,10 @@ class Solution(object):
         for ind, val in enumerate(inorder):
             dict_inorder[val] = ind
 
-        
-
         if inorder:
             m_value = preorder.pop(0)
             INDEX = dict_inorder[m_value]
-            root = TreeNode(inorder[INDEX])
+            root = TreeNode(m_value)
             root.left = self.buildTree(preorder, inorder[:INDEX])
             root.right = self.buildTree(preorder, inorder[INDEX+1:])
             return root
