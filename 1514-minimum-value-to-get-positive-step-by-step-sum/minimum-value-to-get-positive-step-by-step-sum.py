@@ -23,3 +23,8 @@ class Solution(object):
             min_start_value = min(min_start_value, prefix_sum)
         return -min_start_value + 1
         
+
+        # nums = [-3, 2, -3, 4, 2]
+        # prefix_sum = [-3, -1, -4, 0, 2]
+        # X = 1 - min(prefix_sum)
+        # X = 1 - (-4) = 5
