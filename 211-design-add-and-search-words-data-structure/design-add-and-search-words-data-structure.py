@@ -1,46 +1,36 @@
-class TrieNode:
-    def __init__(self):
-        self.children={}
-        self.endOfWord=False
-
 class WordDictionary(object):
 
     def __init__(self):
-        self.root = TrieNode()    
-
+        self.word_dict = collections.defaultdict(set)
+        
     def addWord(self, word):
         """
         :type word: str
         :rtype: None
         """
-        curr = self.root
-        for c in word:
-            if c not in curr.children:
-                curr.children[c] = TrieNode()
-            curr = curr.children[c]
-        curr.endOfWord = True
+        self.word_dict[len(word)].add(word)
 
     def search(self, word):
         """
         :type word: str
         :rtype: bool
         """
-        def dfs(j, root):
-            curr = root
-            for i in range(j, len(word)):
-                c = word[i]
-                if c == ".":
-                    for child in curr.children.values():
-                        if dfs(i+1, child):
-                            return True
-                    return False
-                else:
-                    if c not in curr.children:
-                        return False
-                    curr = curr.children[c]
-            return curr.endOfWord
-        return dfs(0, self.root)    
-
+        if "." not in word:
+            if word not in self.word_dict[len(word)]:
+                return False
+            else:
+                return True
+        
+        for word_in_set in self.word_dict[len(word)]:
+            matched = True
+            for idx, search_char in enumerate(word):
+                if word_in_set[idx] != search_char and search_char != ".":
+                    matched = False
+                    break
+            if matched:
+                return True
+        return False
+        
 
 
 # Your WordDictionary object will be instantiated and called as such:
