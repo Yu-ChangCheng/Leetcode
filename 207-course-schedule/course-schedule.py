@@ -25,8 +25,6 @@ class Solution(object):
             lookup[course] = []
             return True
 
-
-
         for i in range(numCourses):
             if not dfs(i):
                 return False
