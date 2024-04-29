@@ -3,7 +3,6 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-from heapq import heappush, heappop
 class Solution(object):
     def mergeKLists(self, lists):
         """
@@ -14,7 +13,7 @@ class Solution(object):
         for idx, node in enumerate(lists):
             if node:
                 heappush(min_heap, (node.val, idx))
-            
+
         head = ListNode()
         dummy = head
 
@@ -26,4 +25,3 @@ class Solution(object):
             if lists[idx]:
                 heappush(min_heap, (lists[idx].val, idx))
         return dummy.next
-
