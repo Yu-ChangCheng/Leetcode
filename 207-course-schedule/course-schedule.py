@@ -7,7 +7,7 @@ class Solution(object):
         """
         seen = set()
         lookup = defaultdict(list)
-        
+
         for course, pre in prerequisites:
             lookup[course].append(pre)
         
@@ -16,7 +16,6 @@ class Solution(object):
                 return False
             if lookup[course] == []:
                 return True
-            
             seen.add(course)
             for pre in lookup[course]:
                 if not dfs(pre):
@@ -29,5 +28,3 @@ class Solution(object):
             if not dfs(i):
                 return False
         return True
-            
-
