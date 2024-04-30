@@ -16,7 +16,8 @@ class Solution(object):
             elif int(s[l]) + carry == 2:
                 carry = 1
                 count += 1
-            ## odd number with carry 
+            ## odd number with carry = 0, result odd
+            ## even number with carry = 1 result odd
             else:
                 carry = 1
                 count += 2
