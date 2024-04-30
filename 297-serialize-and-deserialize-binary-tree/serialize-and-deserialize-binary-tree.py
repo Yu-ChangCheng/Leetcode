@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+from collections import deque
 class Codec:
 
     def serialize(self, root):
@@ -13,19 +13,16 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        node_list = []
+        result = []
         def dfs(node):
             if not node:
-                node_list.append("None")
+                result.append("None")
                 return
-            node_list.append(str(node.val))
+            result.append(str(node.val))
             dfs(node.left)
             dfs(node.right)
-
         dfs(root)
-        
-        return " ".join(node_list)
-            
+        return " ".join(result)
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -33,18 +30,19 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        node_list = data.split(" ")
-        queue = deque(node_list)
+        data = data.split(" ")
+        queue = deque(data)
 
         def helper(queue):
             node = queue.popleft()
             if node == "None":
-                return
+                return 
             root = TreeNode(node)
             root.left = helper(queue)
             root.right = helper(queue)
             return root
-        return helper(queue)    
+        return helper(queue)
+
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
