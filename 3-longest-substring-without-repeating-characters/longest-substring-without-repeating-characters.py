@@ -17,6 +17,6 @@ class Solution(object):
                 substring_set.remove(s[l])
                 l += 1
             substring_set.add(s[r])
-            res = max(res, r - l + 1)
+            res = max(res, r-l+1)
         return res
         
