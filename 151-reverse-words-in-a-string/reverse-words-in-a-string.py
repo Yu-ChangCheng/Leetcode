@@ -4,6 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+        '''
         list_s = s.split(" ")
         list_s = list_s[::-1]
         new_list_s = []
@@ -15,9 +16,9 @@ class Solution(object):
         s = s.lstrip(" ")
         s = s.rstrip(" ")
         return s
+        '''
 
-        # or 
 
-        # list_s = s.split()
-        # list_s = list_s[::-1]
-        # return s
+        list_s = s.split()
+        list_s = list_s[::-1]
+        return " ".join(list_s)
