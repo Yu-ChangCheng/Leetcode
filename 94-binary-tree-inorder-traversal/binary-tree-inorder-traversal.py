@@ -10,6 +10,11 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right) if root else []
-
-            
+        res = []
+        self.inorder(root, res)
+        return res
+    def inorder(self, root, res):
+        if root:
+            self.inorder(root.left, res)
+            res.append(root.val)
+            self.inorder(root.right, res)
