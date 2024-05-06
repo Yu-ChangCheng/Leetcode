@@ -9,24 +9,21 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
+        if not head:
+            return None
         stack = []
 
-        curr = head
-
-        while curr:
-            while stack and stack[-1].val < curr.val:
+        while head:
+            while stack and head.val > stack[-1].val:
                 stack.pop()
-            stack.append(curr)
-            curr = curr.next
-        # print(stack)
-        
-        head = ListNode()
-        dummy = head
-        for n in stack:
-            head.next = n
+            stack.append(head)
             head = head.next
-        # print(dummy)
+            
+        dummy = ListNode()
+        head = dummy
+        for node in stack:
+            head.next = node
+            head = head.next
         return dummy.next
-        
-        
 
+            
