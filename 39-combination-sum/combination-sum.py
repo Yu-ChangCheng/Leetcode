@@ -5,19 +5,20 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        res = []
+        self.res = []
+        curr = []
 
-        def backtracking(i, curr, curr_sum):
-            if i >= len(candidates) or curr_sum > target:
-                return 
-            if curr_sum == target:
-                res.append(curr[:])
+        def backtracking(i, curr, currSum):
+            if i == len(candidates) or currSum > target:
                 return
-    
+            if currSum == target:
+                self.res.append(curr[:])
+                return
             curr.append(candidates[i])
-            backtracking(i, curr, curr_sum + candidates[i])
+            backtracking(i, curr, currSum + candidates[i])
             curr.pop()
-            backtracking(i+1, curr, curr_sum)
-
-        backtracking(0, [], 0)
-        return res
+            backtracking(i+1, curr, currSum)
+        
+        backtracking(0, curr, 0)
+        return self.res
+        
