@@ -4,30 +4,13 @@ class Solution(object):
         :type stones: List[int]
         :rtype: int
         """
-
-        '''
-        if not stones:
-            return 0
-        if len(stones) == 1:
-            return stones[0]
-
-        while len(stones) >= 2:
-            stones.sort()
-            stone_a = stones.pop()
-            stone_b = stones.pop()
-            new_stone = abs(stone_a - stone_b)
-            stones.append(new_stone)
-            
-        return stones[0]
-        
-        '''
         stones = [-s for s in stones]
         heapq.heapify(stones)
- 
-        while len(stones) > 1:
-            first, second = heapq.heappop(stones), heapq.heappop(stones)
-
-            diff = - abs(first-second)
+        while stones and len(stones) > 1:
+            first_stone = heapq.heappop(stones)
+            second_stone = heapq.heappop(stones)
+            diff = - abs(first_stone - second_stone)
             heapq.heappush(stones, diff)
-        
-        return abs(stones[0])
+        return -stones[0]
+            
+            
