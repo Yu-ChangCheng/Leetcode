@@ -9,8 +9,8 @@ class Solution(object):
         n = len(nums)
         if k > n:
             k %= n 
-        first = nums[n-k:][:]
-        second = nums[:n-k][:]
+        first = nums[n-k:]
+        second = nums[:n-k]
         ans = first + second
         for i in range(len(ans)):
             nums[i] = ans[i]
