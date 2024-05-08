@@ -4,9 +4,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        self.res =[]
+        self.res = []
         curr = []
+
         def backtracking(curr):
+
             if len(curr) == len(nums):
                 self.res.append(curr[:])
                 return
