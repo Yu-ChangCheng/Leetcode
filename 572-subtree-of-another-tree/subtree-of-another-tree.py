@@ -13,22 +13,23 @@ class Solution(object):
         """
         if not subRoot:
             return True
-        
-        if not root and subRoot:
+        if not root:
             return False
-        
-        if self.isSameTree(root, subRoot):
-            return True
 
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        result = self.isSameTree(root, subRoot)
+        
+        return result or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
     def isSameTree(self, p, q):
         if not p and not q:
             return True
             
-        if not q and p or not p and q or p.val != q.val:
+        if (p and not q) or (q and not p) or (p.val != q.val):
             return False
 
+        
+        
         left = self.isSameTree(p.left, q.left)
         right = self.isSameTree(p.right, q.right)
+
         return left and right
