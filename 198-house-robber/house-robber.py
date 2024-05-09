@@ -4,17 +4,11 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        if len(nums) <= 2:
+            return max(nums)
         
-        rob1 = 0
-        rob2 = 0
-        #[rob1,rob2,(temp = max(n+rob1, rob2)),...]
-        #[n,rob1,]
-        # res=[]
-        for n in nums:
-          temp = max(n + rob1, rob2)
-          rob1 = rob2
-          rob2 = temp
-        #   res.append(temp)
-        # print(res)
-        return rob2
-        
+        nums[1] = max(nums[0], nums[1])
+        for i in range(2,len(nums)):
+            nums[i] = max((nums[i] + nums[i-2]), nums[i-1])
+        print(nums)
+        return nums[-1]
