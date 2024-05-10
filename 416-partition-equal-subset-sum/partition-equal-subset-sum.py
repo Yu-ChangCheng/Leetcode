@@ -6,7 +6,7 @@ class Solution(object):
         """
         if sum(nums) % 2 != 0:
             return False
-
+        
         dp = set()
         target = sum(nums) // 2
         dp.add(0)
@@ -15,6 +15,6 @@ class Solution(object):
             next_dp = set()
             for t in dp:
                 next_dp.add(t)
-                next_dp.add(t+nums[i])
+                next_dp.add(nums[i]+t)
             dp = next_dp
         return True if target in dp else False
