@@ -5,8 +5,8 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
-        q = deque([s])
         seen = set()
+        q = deque([s])
         while q:
             s = q.popleft()
             for word in wordDict:
@@ -19,3 +19,4 @@ class Solution(object):
                             q.append(new_s)
                             seen.add(new_s)
         return False
+        
