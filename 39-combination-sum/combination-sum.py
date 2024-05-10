@@ -9,7 +9,7 @@ class Solution(object):
         curr = []
 
         def backtracking(i, curr, currSum):
-            if i == len(candidates) or currSum > target:
+            if i > len(candidates) - 1 or currSum > target:
                 return
             if currSum == target:
                 self.res.append(curr[:])
