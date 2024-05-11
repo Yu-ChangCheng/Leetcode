@@ -5,12 +5,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        dict_complement = defaultdict(int)
+        hashmap = {}
 
-        for i in range(len(nums)):
-            complement = target - nums[i]
-            if complement not in dict_complement:
-                dict_complement[nums[i]] = i
+        for i, a in enumerate(nums):
+            complement = target - a
+            if a in hashmap:
+                return [i, hashmap[a]]
             else:
-                return [dict_complement[complement],i]
-                
+                hashmap[complement] = i
+        
