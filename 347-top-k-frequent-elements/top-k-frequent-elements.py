@@ -5,6 +5,20 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
+        res = []
+        count = Counter(nums)
+        freq = [[] for _ in range(len(nums)+1)]
+        for n, c in count.items():
+            freq[c].append(n)
+        
+        for i in range(len(freq)-1, 0, -1):
+            for n in freq[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res
+        
+
+
         min_heap = []
         look_up = Counter(nums)
         res = []
@@ -15,6 +29,8 @@ class Solution(object):
             else:
                 heapq.heappush(min_heap, (count, n))
         
-        for i in range(k-1, -1, -1):
-            res.append(min_heap[i][1])
+        while k > 0:
+            res.append(heapq.heappop(min_heap)[1])
+            k -= 1
         return res
+
