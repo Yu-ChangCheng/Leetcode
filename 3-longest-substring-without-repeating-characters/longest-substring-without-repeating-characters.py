@@ -4,19 +4,23 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-
-        if len(s) == 0: return 0
-        if len(s) == 1: return 1
-
-        l = 0
-        substring_set = set()
-        res = 0
-
-        for r in range(len(s)):
-            while s[r] in substring_set:
-                substring_set.remove(s[l])
-                l += 1
-            substring_set.add(s[r])
-            res = max(res, r-l+1)
-        return res
+        if len(s) == 0:
+            return 0
+        if len(s) == 1:
+            return 1
         
+        seen = set()
+        l = 0
+        r = 0
+        maxLength = 0
+        while l <= r and r < len(s):
+            if s[r] not in seen:
+                seen.add(s[r])
+                maxLength = max(maxLength, r - l + 1)
+                r += 1
+            else:
+                seen.remove(s[l])
+                l += 1
+        return maxLength
+
+
