@@ -15,4 +15,4 @@ class Solution(object):
             elif two_sum > target:
                 r -= 1
             else:
-                return [l+1, r+1]
+                return [l+1, r+1] # the index start from 1
