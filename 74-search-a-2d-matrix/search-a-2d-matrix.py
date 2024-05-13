@@ -14,9 +14,9 @@ class Solution(object):
 
         while TOP <= BOTTOM:
             MID = (TOP + BOTTOM) // 2
-            if matrix[MID][0] > target:
+            if matrix[MID][0] > target: # if the start of the array larger than target
                 BOTTOM = MID - 1
-            elif matrix[MID][-1] < target:
+            elif matrix[MID][-1] < target: # if the end of the array less than target
                 TOP = MID + 1
             else:
                 break
@@ -26,10 +26,11 @@ class Solution(object):
         
         while l <= r:
             m = (l+r) // 2 
-            if matrix[MID][m] > target:
+            if matrix[MID][m] > target: 
                 r = m - 1
-            elif matrix[MID][m] < target:
+            elif matrix[MID][m] < target: 
                 l = m + 1
             else:
                 return True
+
         return False
