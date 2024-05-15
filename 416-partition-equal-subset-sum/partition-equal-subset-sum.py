@@ -12,9 +12,7 @@ class Solution(object):
         dp.add(0)
 
         for i in range(len(nums)):
-            next_dp = set()
-            for t in dp:
-                next_dp.add(t)
-                next_dp.add(nums[i]+t)
-            dp = next_dp
+            for t in dp.copy():
+                dp.add(t)
+                dp.add(nums[i]+t)
         return True if target in dp else False
