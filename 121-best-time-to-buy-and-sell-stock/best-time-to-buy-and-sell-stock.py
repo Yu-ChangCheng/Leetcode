@@ -7,7 +7,18 @@ class Solution(object):
         l = 0
         r = 0
         maxProfit = 0
-
+        l = 0 
+        r = 0
+        maxProfix = 0
+        while r < len(prices) and l <= r:
+            if prices[r] > prices[l]:
+                maxProfit = max(prices[r] - prices[l], maxProfit)
+                r += 1
+            else:
+                l = r
+                r += 1
+        return maxProfit
+        
         while r < len(prices) and l <= r:
             if prices[r] > prices[l]:
                 maxProfit = max(prices[r] - prices[l], maxProfit)
