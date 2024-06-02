@@ -10,15 +10,15 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        c = 0 
+        c = 0
         for i in range(n):
             if knows(c, i):
                 c = i
-            
-
+        
         if any(knows(c, i) for i in range(c)):
             return -1
 
         if any(not knows(i, c) for i in range(n)):
             return -1
+        
         return c
