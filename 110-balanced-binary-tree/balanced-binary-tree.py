@@ -10,14 +10,30 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        return self.dfs(root)[0]
+        
+
+        def dfs(node):
+            if not node:
+                return [True, 0]
+            
+            left = dfs(node.left)
+            right = dfs(node.right)
+
+            isBlanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+            return [isBlanced, 1 + max(left[1], right[1])]
+        
+        return dfs(root)[0]
+
 
     def dfs(self, node):
-        if not node: return [True, 0] # [isBalanced, height]
+        if not node:
+            return [True, 0] # [True, level]
 
-        left = self.dfs(node.left) 
+        left = self.dfs(node.left)
         right = self.dfs(node.right)
 
-        isBalanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+        isBlanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
 
-        return [isBalanced, 1 + max(left[1], right[1])]
+        return [isBlanced, 1 + max(left[1], right[1])]
+
+        return self.dfs(root)[0]
