@@ -8,6 +8,20 @@ class Solution(object):
         res = []
         count = Counter(nums)
         freq = [[] for _ in range(len(nums)+1)]
+
+        for n, c in count.items():
+            freq[c].append(n)
+
+        for i in range(len(freq)-1, 0, -1):
+            for n in freq[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res
+
+
+        res = []
+        count = Counter(nums)
+        freq = [[] for _ in range(len(nums)+1)]
         for n, c in count.items():
             freq[c].append(n)
         
@@ -17,8 +31,6 @@ class Solution(object):
                 if len(res) == k:
                     return res
         
-
-
         min_heap = []
         look_up = Counter(nums)
         res = []
