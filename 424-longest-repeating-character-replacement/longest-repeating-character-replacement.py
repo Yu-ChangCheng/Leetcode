@@ -6,14 +6,18 @@ class Solution(object):
         :rtype: int
         """
         count = defaultdict(int)
-        res = 0
         l = 0
-        
+        res = 0
+
         for r in range(len(s)):
             count[s[r]] += 1
-            while (r - l + 1) - max(count.values()) > k:
-                count[s[l]] -= 1
-                l += 1
-            res = max(res, (r - l + 1))     
-        
+            if (r-l+1) - max(count.values()) > k: # if current window is not valid
+                count[s[l]] -= 1 # remove the left
+                l += 1 # move left pointer
+            else:
+                # if current window is valid update the res with possible window length
+                res = max(res, r-l+1) 
         return res
+
+        
+        
