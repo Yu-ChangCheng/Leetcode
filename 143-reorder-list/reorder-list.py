@@ -15,23 +15,21 @@ class Solution(object):
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        # mid of the list is the slow.next
 
+        # mid of the list is the slow.next
         second = slow.next
         slow.next = None # disconnect the first list and second list
 
-        prev = None
-        while second:
+        prev = None # reverse the second list
+        while second: 
             temp = second.next
             second.next = prev
             prev = second
             second = temp
 
         # combine two list
-
         first = head
         second = prev
-
         while second: # be careful since list2 is shorter than list 1 so the last node would be from list1
             temp1 = first.next
             temp2 = second.next
