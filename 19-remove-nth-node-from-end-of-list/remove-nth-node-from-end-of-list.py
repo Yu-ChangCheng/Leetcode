@@ -13,9 +13,10 @@ class Solution(object):
         #    [1,2,3,4,5]
         #.   l . r           n = 2
 
-        # First to have two pointers with interval n
-        Dummy = ListNode(next = head)
+        Dummy = ListNode()
+        Dummy.next = head
 
+        # First to have two pointers with interval n
         slow = Dummy
         fast = head
 
