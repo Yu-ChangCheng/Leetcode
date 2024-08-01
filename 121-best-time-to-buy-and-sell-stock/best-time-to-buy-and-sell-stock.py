@@ -4,18 +4,18 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        # [7,2,3,1,5,3,6,9]
-
+        # prices = [7,1,5,3,6,4]
+        maxProfit = 0
         l = 0
         r = 0
-        maxProfit = 0
         while r < len(prices):
-            if prices[r] >= prices[l]: # if the right pointer is larger than the left, meaning valid window, move right pointer
-                maxProfit = max(prices[r] - prices[l], maxProfit)
-                r += 1 # 
-            else: # else the window is not valid, move the left pointer
+            if prices[l] <= prices[r]: # check if it is a valid window, keep moves the right pointer
+                currProfit = prices[r] - prices[l]
+                maxProfit = max(currProfit, maxProfit)
+            else: # it is not a valid window move the left pointer
                 l = r
-                r = r + 1
+            r += 1
         return maxProfit
+        # TC: O(n) / SC: O(1)
 
-        
+            
