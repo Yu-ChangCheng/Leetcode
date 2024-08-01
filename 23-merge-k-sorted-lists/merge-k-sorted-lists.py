@@ -29,10 +29,9 @@ class Solution(object):
         if not lists or len(lists) == 0:
             return None
         
-        '''
+
         while len(lists) > 1:
             mergedLists = []
-
             for i in range(0, len(lists), 2):
                 l1 = lists[i]
                 l2 = lists[i+1] if (i+1) < len(lists) else None
@@ -54,9 +53,8 @@ class Solution(object):
             tail = tail.next
         if l2:
             tail.next = l2
-
         if l1:
             tail.next = l1
         return dummy.next
-        '''
+
                 
