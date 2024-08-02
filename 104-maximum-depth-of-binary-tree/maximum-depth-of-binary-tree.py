@@ -13,7 +13,7 @@ class Solution(object):
         if not root:
             return 0
         
-        left = self.maxDepth(root.left)
-        right = self.maxDepth(root.right)
+        leftMax = self.maxDepth(root.left)
+        rightMax = self.maxDepth(root.right)
 
-        return 1 + max(left, right)
+        return 1 + max(leftMax, rightMax)
