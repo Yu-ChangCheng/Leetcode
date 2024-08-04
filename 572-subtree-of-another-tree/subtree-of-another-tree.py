@@ -11,13 +11,14 @@ class Solution(object):
         :type subRoot: TreeNode
         :rtype: bool
         """
+        # Two Base Cases 
         if not subRoot:
             return True
         if not root:
             return False
 
-        root_node = self.isSameTree(root, subRoot)
-        
+        root_node = self.isSameTree(root, subRoot) # Compare each Node
+        # Compare the left child and right child
         return root_node or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
     def isSameTree(self, p, q):
