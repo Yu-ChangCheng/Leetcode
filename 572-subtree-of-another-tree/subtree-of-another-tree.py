@@ -16,19 +16,17 @@ class Solution(object):
         if not root:
             return False
 
-        result = self.isSameTree(root, subRoot)
+        root_node = self.isSameTree(root, subRoot)
         
-        return result or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        return root_node or self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
     def isSameTree(self, p, q):
         if not p and not q:
             return True
-            
+
         if (p and not q) or (q and not p) or (p.val != q.val):
             return False
-
-        
-        
+            
         left = self.isSameTree(p.left, q.left)
         right = self.isSameTree(p.right, q.right)
 
