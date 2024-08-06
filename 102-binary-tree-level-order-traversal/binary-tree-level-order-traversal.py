@@ -19,8 +19,8 @@ class Solution(object):
 
         while q: #3    
             level = [] # []
-            for i in range(len(q)):
-                node = q.popleft() #3
+            for i in range(len(q)): # 1
+                node = q.popleft() # 3
                 if node: # true
                     level.append(node.val) # level = [3]
                     if node.left:
