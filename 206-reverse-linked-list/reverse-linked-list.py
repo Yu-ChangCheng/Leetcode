@@ -9,23 +9,31 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        prev = None
-        curr = head
+        # 1 -> 2 -> 3 -> None
+        if not head or not head.next:
+            return head
 
-        while curr:
-            next_node = curr.next
-            curr.next = prev
-            prev = curr
-            curr = next_node
+        # return the reverse_head
+        reverse_head = self.reverseList(head.next) # head = 2, reverse_head = 3
+
+        # recursion start to reverse
+        head.next.next = head # 2.next.next = 2 
+        # 1 -> 2 <-> 3
+        head.next = None # 2 -> None
+        # 1 -> 2 <- 3
+
+        return reverse_head # return 3
+
+
         
-        return prev
 
-        prev = None
-        curr = head
 
-        while curr:
-            next_node = curr.next #(2) (3)
-            curr.next = prev #(->None) (->1)
-            prev = curr #(None to 1) (2)
-            curr = next_node #(2) (3)
-        return prev
+        # prev = None #(None)
+        # curr = head #(1)
+
+        # while curr:
+        #     next_node = curr.next #(2) / (3)
+        #     curr.next = prev #(->None) / (->1)
+        #     prev = curr #(None to 1) / (2)
+        #     curr = next_node #(2) / (3)
+        # return prev
