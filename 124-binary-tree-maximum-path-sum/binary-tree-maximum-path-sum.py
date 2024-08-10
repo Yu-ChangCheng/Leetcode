@@ -12,17 +12,22 @@ class Solution(object):
         """
         if not root:
             return 0
-            
+
         self.maxLength = -float('Inf')
 
         def postorder(node):
             if not node:
                 return
-            
-            left = max(0, postorder(node.left))
-            right = max(0, postorder(node.right))
-            currSum = node.val + left + right
+
+            # if child node is negative, don't include this by compare to 0
+            left = max(0, postorder(node.left)) # left 
+            right = max(0, postorder(node.right)) # right
+            currSum = node.val + left + right # node
             self.maxLength = max(self.maxLength, currSum)
             return node.val + max(left, right)
+
         postorder(root)
         return self.maxLength
+
+        # O(N)
+        # O(H), O(logN) if is balanced tree
