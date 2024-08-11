@@ -13,12 +13,13 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
+        # 
         result = []
         def dfs(node):
             if not node:
                 result.append("None")
                 return
-            result.append(str(node.val))
+            result.append(str(node.val)) # Preorder-traverse root, left, right
             dfs(node.left)
             dfs(node.right)
         dfs(root)
@@ -33,11 +34,11 @@ class Codec:
         data = data.split(" ")
         queue = deque(data)
 
-        def helper(queue):
+        def helper(queue): # Use queue to pop the root
             node = queue.popleft()
             if node == "None":
                 return 
-            root = TreeNode(node)
+            root = TreeNode(int(node))
             root.left = helper(queue)
             root.right = helper(queue)
             return root
