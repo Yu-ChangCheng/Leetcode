@@ -5,31 +5,34 @@ class Solution(object):
         :type word: str
         :rtype: bool
         """
-        row, col = len(board), len(board[0])
-        R, C, seen = range(row), range(col), set()
+        ROWS = len(board)
+        COLS = len(board[0])
 
-        def dfs(coord, i=0):
-            
-            if len(word) == i: return True
-            
-            r,c = coord
+        def dfs(r,c,i):
+            if i == len(word):    # base case if matched the len, meaning we found the word
+                return True
+            # if out of bound or not matched return False
+            if r < 0 or r > ROWS - 1 or c < 0 or c > COLS - 1 or board[r][c] != word[i]:
+                return False
+            temp = board[r][c]      # store a temp char before backtracking
+            board[r][c] = "#"       # mark current node as visited
+            result = (              # DFS visit the neighbors
+                dfs(r+1, c, i+1) or 
+                dfs(r-1, c, i+1) or
+                dfs(r, c+1, i+1) or
+                dfs(r, c-1, i+1)
+            )
+            board[r][c] = temp      # restore the temp char after backtracking 
+            return result
 
-            if (r not in R or c not in C or 
-                coord in seen            or 
-                board[r][c] != word[i]): return False
-            
-            seen.add(coord)
+        result = False
+        for r in range(ROWS):
+            for c in range(COLS):
+                if board[r][c] == word[0]:
+                    result = dfs(r, c, 0)
+                if result:
+                    return True
+        return False
+        # TC: O(m * n * 4^len(word)) for each cell in the board, where DFS can have a depth of up to len(word) in four directions
+        # SC: O(len(word)) for the DFS call stack  
 
-            res = (dfs((r+1,c), i+1) or dfs((r,c+1), i+1) or
-                   dfs((r-1,c), i+1) or dfs((r,c-1), i+1))
-            
-            seen.remove(coord)
-
-            return res
-
-        boardCt, wrdCt = Counter(chain(*board)), Counter(word)
-        if any (boardCt[ch] < wrdCt[ch] for ch in wrdCt): return False
-
-        if boardCt[word[0]] > boardCt[word[-1]]: word = word[::-1]
-        
-        return any(dfs((r, c))  for c in C for r in R)
