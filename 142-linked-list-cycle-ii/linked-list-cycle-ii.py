@@ -25,10 +25,10 @@ class Solution(object):
 
         # start from begining 
         slow = head
-        while fast:
+        while fast:          # while slow!= fast:
             if slow == fast:
                 return slow
             slow = slow.next
             fast = fast.next
-        return None
+
         
