@@ -32,7 +32,6 @@ class Trie(object):
             curr = curr.children[char]
         return curr.isEnd == True
 
-    
     def startsWith(self, prefix):
         """
         :type prefix: str
