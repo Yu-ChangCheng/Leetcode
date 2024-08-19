@@ -28,7 +28,7 @@ class Solution(object):
         return count
 
         
-        '''
+        
         def bfs(r, c):
             # Initialize the queue with the starting cell and mark it as visited
             q = deque([(r, c)])
@@ -52,9 +52,8 @@ class Solution(object):
                     count += 1
                     bfs(r, c)
         return count
-        '''
+        
 
-        '''
         def dfs(r, c):
             stack = [(r, c)]
             while stack:
@@ -73,5 +72,17 @@ class Solution(object):
                     count += 1
                     dfs(r, c)
         return count
-        '''   
+           
+
+
+
+
+
+
+
+
+
+
+
+
 
