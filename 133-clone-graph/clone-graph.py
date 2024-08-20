@@ -12,21 +12,21 @@ class Solution(object):
         :type node: Node
         :rtype: Node
         """
-        # check if not node return None
         if not node:
             return None
 
-        # have a hashmap and queue to clone graph BFS
-        visited = {}
-        queue = deque([node]) # deque items has to iterable otherwise use append, Note: this node contains neighbors
-        visited[node] = Node(node.val, []) # initailize the first node as copy and neighbor as an empty list
+        queue = deque()
+        queue.append(node) # queue will store all the original node
+        lookup = {}
+        lookup[node] = Node(node.val, []) # loop up will store all the copied node
 
         while queue:
-            visited_node = queue.popleft() # pop out the node from queue
-            for neighbor in visited_node.neighbors: # check the neighbor in the node's neighbors Note the neighbor here is also a Node already
-                if neighbor not in visited:
-                    visited[neighbor] = Node(neighbor.val, [])
-                    queue.append(neighbor)
-                visited[visited_node].neighbors.append(visited[neighbor])
-        return visited[node]
+            curr_node = queue.popleft()
+            for neighbor in curr_node.neighbors:
+                if neighbor not in lookup: # if not exist in the map
+                    lookup[neighbor] = Node(neighbor.val, []) # create a copy
+                    queue.append(neighbor) # add it to the queue for future
+                lookup[curr_node].neighbors.append(lookup[neighbor]) # append neighbor node to curr_node's neighbor list
+        return lookup[node] # when queue is empty return the first copy node 
+                
                 
