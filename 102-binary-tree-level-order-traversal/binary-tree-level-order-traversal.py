@@ -11,23 +11,29 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         if not root:
-            return []
+            return None
 
-        q = deque()
+        q = collections.deque()
         q.append(root)
-        res = []
 
-        while q: #3    
-            level = [] # []
-            for i in range(len(q)): # 1
-                node = q.popleft() # 3
-                if node: # true
-                    level.append(node.val) # level = [3]
-                    if node.left:
-                        q.append(node.left) # q = [9]
-                    if node.right:
-                        q.append(node.right) # q = [9, 20]
-            if level:
-                res.append(level) # res = [[3]]
-        return res
+        result = []
+
+        # start BFS
+        while q:
+            level = []
+            for i in range(len(q)): # to know how many nodes in current level
+                curr_node = q.popleft()
+                level.append(curr_node.val)
+                if curr_node.left:
+                    q.append(curr_node.left)
+                if curr_node.right:
+                    q.append(curr_node.right)
+            result.append(level[:])
+
+        return result
+
+
                 
+
+
+        
