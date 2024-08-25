@@ -8,12 +8,13 @@ class Solution(object):
             return 1
         if n == 2:
             return 2
-
-        one = 1
-        two = 2
-
-        for i in range(n-2):
-            temp = two
-            two = one + two
-            one = temp
-        return two
+        
+        prev2 = 1
+        prev1 = 2
+        
+        for i in range(3, n + 1):
+            curr = prev1 + prev2
+            prev2 = prev1
+            prev1 = curr
+        
+        return curr
