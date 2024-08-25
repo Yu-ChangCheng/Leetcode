@@ -14,7 +14,7 @@ class Solution(object):
         self.postorder(root, res)
         return res
 
-    def postorder(self, root, res):
+    def postorder(self, root, res): #(L->R->Root)
         if root:
             self.postorder(root.left, res)
             self.postorder(root.right, res)
