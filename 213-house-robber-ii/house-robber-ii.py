@@ -11,18 +11,21 @@ class Solution(object):
         if n == 2:
             return max(nums)
         
-        def rob_linear(houses):
-            prev2, prev1 = houses[0], max(houses[0], houses[1])
-            for i in range(2, len(houses)):
-                curr = max(prev1, prev2 + houses[i])
-                prev2, prev1 = prev1, curr
-            return prev1
+        def rob_linear(houses, start, end):
+            prev2 = 0 
+            prev1 = 0
+            for i in range(start, end):
+                curr = max(prev2+houses[i], prev1)
+                prev2 = prev1
+                prev1 = curr
+            return curr
+
         
         # Scenario 1: Exclude the last house
-        rob1 = rob_linear(nums[:-1])
+        rob1 = rob_linear(nums, 0, n-1)
         
         # Scenario 2: Exclude the first house
-        rob2 = rob_linear(nums[1:])
+        rob2 = rob_linear(nums, 1, n)
         
         return max(rob1, rob2)
 
