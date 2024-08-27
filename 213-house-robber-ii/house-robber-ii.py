@@ -4,6 +4,30 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        if n == 2:
+            return max(nums)
+        
+        def rob_linear(houses):
+            prev2, prev1 = houses[0], max(houses[0], houses[1])
+            for i in range(2, len(houses)):
+                curr = max(prev1, prev2 + houses[i])
+                prev2, prev1 = prev1, curr
+            return prev1
+        
+        # Scenario 1: Exclude the last house
+        rob1 = rob_linear(nums[:-1])
+        
+        # Scenario 2: Exclude the first house
+        rob2 = rob_linear(nums[1:])
+        
+        return max(rob1, rob2)
+
+
+
         n = len(nums)
         if n <= 2:
             return max(nums)
