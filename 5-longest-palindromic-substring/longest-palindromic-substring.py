@@ -4,8 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        # also check out 647
-        # The 
+        # Also check out 647
         self.res = ""
         self.res_len = 0
 
