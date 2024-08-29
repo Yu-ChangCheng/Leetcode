@@ -10,30 +10,24 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+        #            1
+        #           / \
+        #          2   3 
+        #         /\   /\
+        #       4   5  1  6
+        #                  \
+        #                   7
         self.diameter = 0
 
         def depth(node):
             if not node:
                 return 0
             
-            left = depth(node.left)
-            right = depth(node.right)
-            self.diameter = max(self.diameter, left + right)
-            return 1 + max(left, right)
-
-        depth(root)
-        return self.diameter
-
-        self.diameter = 0
-
-        def depth(node):
-            if not node:
-                return 0
-
-            left = depth(node.left)
-            right = depth(node.right)
-            self.diameter = max(self.diameter, left + right)
-            return 1 + max(left, right)
+            left_depth = depth(node.left)
+            right_depth  = depth(node.right)
+            curr_diameter = left_depth + right_depth
+            self.diameter = max(self.diameter, curr_diameter)
+            return 1 + max(left_depth, right_depth) 
         
         depth(root)
         return self.diameter
