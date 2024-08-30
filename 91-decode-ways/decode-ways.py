@@ -26,6 +26,9 @@ class Solution(object):
         #             dp[i] += dp[0] # when i = 1
         # return dp[-1]
 
+
+
+
         # Edge case check
         if not s or s[0] == '0':
             return 0
@@ -50,3 +53,8 @@ class Solution(object):
             prev2, prev1 = prev1, current
 
         return prev1
+
+
+
+
+        
