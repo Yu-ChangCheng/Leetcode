@@ -4,6 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # use five variables
         curr_max = nums[0]
         curr_min = nums[0]
         res = nums[0]
