@@ -10,7 +10,7 @@ class Solution(object):
         q = deque([s])
         while q:
             s = q.popleft()
-            for word in wordDict:
+            for word in wordDictSet:
                 if s[:len(word)] in wordDictSet:
                     new_s = s[len(word):]
                     if new_s == "":
