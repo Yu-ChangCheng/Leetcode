@@ -5,6 +5,30 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
+        seen = set()
+        wordDictSet = set(wordDict)
+        q = deque([s])
+        while q:
+            s = q.popleft()
+            for word in wordDict:
+                if s[:len(word)] in wordDictSet:
+                    new_s = s[len(word):]
+                    if new_s == "":
+                        return True
+                    else:
+                        if new_s not in seen:
+                            q.append(new_s)
+                            seen.add(new_s)
+        return False
+
+
+
+
+
+
+
+
+
         wordSet = set(wordDict)  # Convert the wordDict list to a set for O(1) lookups
         dp = [False] * (len(s) + 1)
         dp[len(s)] = True  # Base case: an empty string is always valid
