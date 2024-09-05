@@ -19,7 +19,7 @@ class Solution(object):
         if not node:
             return None
             
-        if node.val == p.val or node.val == q.val: #if any root is p or q just return the value
+        if node == p or node == q: #if any root is p or q just return the value
             return node
 
         left_node = self.lowestCommonAncestor(node.left, p , q) # 5
