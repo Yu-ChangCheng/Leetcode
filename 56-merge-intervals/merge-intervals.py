@@ -4,12 +4,14 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: List[List[int]]
         """
-        intervals = sorted(intervals)
-        res = [intervals[0]]
-
-        for start, end in intervals[1:]:
-            if start <= res[-1][1]:
-                res[-1][1] = max(end, res[-1][1])
+        intervals.sort()
+        new_interval = intervals[0]
+        res = []
+        for i in range(1,len(intervals)):
+            if new_interval[1] < intervals[i][0]:
+                res.append(new_interval)
+                new_interval = intervals[i]
             else:
-                res.append([start, end])
+                new_interval = (min(intervals[i][0], new_interval[0]), max(intervals[i][1], new_interval[1]))
+        res.append(new_interval)
         return res
