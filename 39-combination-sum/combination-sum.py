@@ -5,41 +5,6 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         self.res = []
         curr =[]
         def backtracking(i, curr, currSum):
