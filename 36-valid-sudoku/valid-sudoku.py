@@ -20,6 +20,20 @@ class Solution(object):
                 squares[(r//3, c//3)].add(board[r][c])
         return True
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         rows = defaultdict(set)
         cols = defaultdict(set)
         squares = defaultdict(set)
