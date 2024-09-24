@@ -18,3 +18,6 @@ class Solution(object):
                 del s2_counter[s2[i-s1_len]]
             s2_counter[s2[i]] += 1
         return s1_counter == s2_counter
+
+        # TC: O(n+m) where n and m are the len of s1 and s2
+        # SC: O(1) as only 26 chars for counter
