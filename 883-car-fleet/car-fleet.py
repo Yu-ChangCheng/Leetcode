@@ -7,7 +7,7 @@ class Solution(object):
         :rtype: int
         """
         pair = [(p,s) for p,s in zip(position,speed)]
-        s_pair = sorted(pair)[::-1]
+        s_pair = sorted(pair)[::-1] # nlogn + n
 
         pre_t = None
         count = 0
