@@ -4,21 +4,6 @@ class Solution(object):
         :type heights: List[int]
         :rtype: int
         """
-        heights.append(0)
-        stack = [-1]
-        max_area = 0
-        
-        for i in range(len(heights)):
-            while heights[i] < heights[stack[-1]]:
-                h = heights[stack.pop()]
-                w = i - stack[-1] - 1
-                max_area = max(max_area, h * w)
-            stack.append(i)
-        
-        heights.pop()
-        return max_area
-
-
         heights.append(0)  # Append a zero to ensure all elements are processed
         stack = [-1]  # Initialize stack with -1 as a dummy index
         max_area = 0  # This will store the maximum area
@@ -31,5 +16,19 @@ class Solution(object):
                 max_area = max(max_area, h * w)  # Update the maximum area
             stack.append(i)  # Push the current index onto the stack
 
-        heights.pop()  # Remove the 0 that we added earlier
         return max_area  # Return the maximum area
+
+
+        stack = [] #[index, value]
+        heights.append(0)
+        maxArea = 0
+
+        for curr_index, curr_val in enumerate(heights):
+            start = curr_index
+            while stack and curr_val < stack[-1][1]:
+                index, height = stack.pop()
+                maxArea = max(maxArea, height * (curr_index - index))
+                start = index
+            stack.append([start, curr_val])
+        
+        return maxArea
