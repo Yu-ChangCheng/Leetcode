@@ -28,12 +28,8 @@ class Solution(object):
             start = curr_index
             while stack and curr_val < stack[-1][1]:
                 index, height = stack.pop()
-                if stack:
-                    width = curr_index - stack[-1][0] - 1
-                elif not stack:
-                    width = curr_index
-                maxArea = max(maxArea, height * width)
-                # start = index # update the start index
+                maxArea = max(maxArea, height * (curr_index - index))
+                start = index # update the start index
             stack.append([start, curr_val])
         
         return maxArea
