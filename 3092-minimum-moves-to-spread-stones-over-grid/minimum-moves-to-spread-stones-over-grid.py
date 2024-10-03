@@ -20,6 +20,9 @@ class Solution(object):
                     extra[(r, c)] = grid[r][c]
 
         def backtracking(zero_index, curr_distance):
+            if curr_distance > self.minimum_distance:
+                return 
+                
             if zero_index == len(zeros):
                 self.minimum_distance = min(self.minimum_distance, curr_distance)        
                 return
