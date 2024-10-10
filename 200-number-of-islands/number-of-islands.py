@@ -8,6 +8,30 @@ class Solution(object):
         rows = len(grid)
         cols = len(grid[0])
 
+        def dfs(r,c):
+            if 0 <= r < rows and 0 <= c < cols:
+                if grid[r][c] == "1":
+                    grid[r][c] = "#"
+                else:
+                    return
+                dfs(r+1,c)
+                dfs(r-1,c)
+                dfs(r,c+1)
+                dfs(r,c-1)
+            return
+        
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == "1":
+                    count += 1
+                    dfs(r,c)
+        return count
+
+                
+        count = 0
+        rows = len(grid)
+        cols = len(grid[0])
+
         def dfs(r, c):
             if 0 <= r < rows and 0 <= c < cols:
                 if grid[r][c] == "1":
