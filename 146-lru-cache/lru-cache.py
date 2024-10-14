@@ -4,7 +4,7 @@ class Node():
         self.val = val
         self.next = None
         self.prev = None
-
+        
 class LRUCache(object):
 
     def __init__(self, capacity):
@@ -31,7 +31,7 @@ class LRUCache(object):
         p_next.prev = node
         node.next = p_next
         node.prev = p_prev
-        
+
     def get(self, key):
         """
         :type key: int
@@ -43,17 +43,17 @@ class LRUCache(object):
             return self.hashmap[key].val
         return -1
 
-
     def put(self, key, value):
         """
         :type key: int
         :type value: int
         :rtype: None
         """
-        new_node = Node(key,value)
+        new_node = Node(key, value)
         if key in self.hashmap:
             self.remove(self.hashmap[key])
             del self.hashmap[key]
+        
         self.hashmap[key] = new_node
         self.insert(new_node)
 
@@ -61,9 +61,6 @@ class LRUCache(object):
             lru_node = self.head.next
             del self.hashmap[lru_node.key]
             self.remove(lru_node)
-
-
-
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
