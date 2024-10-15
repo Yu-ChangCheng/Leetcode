@@ -26,16 +26,12 @@ class Solution(object):
         def depth(node):
             if not node:
                 return 0
-            '''
-            This code snippet has to be inside the depth function
-            '''
+                
             left_depth = depth(node.left) # calculate every left node as root
             right_depth  = depth(node.right) # calculate every right node as root
             curr_diameter = left_depth + right_depth # calculate current diameter
             self.diameter = max(self.diameter, curr_diameter) 
-            '''
-            This code snippet has to be inside the depth function
-            '''
+
             return 1 + max(left_depth, right_depth) 
         
         depth(root)
