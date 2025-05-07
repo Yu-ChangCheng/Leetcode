@@ -5,10 +5,11 @@ class Solution(object):
         :rtype: bool
         """
         seen = set()
-
-        for n in nums:
-            if n not in seen:
-                seen.add(n)
+        for i in nums:
+            if i not in seen:
+                seen.add(i)
             else:
                 return True
         return False
+        
+        
