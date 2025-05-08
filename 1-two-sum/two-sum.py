@@ -6,15 +6,9 @@ class Solution(object):
         :rtype: List[int]
         """
         hashmap = {}
-
-        for i, a in enumerate(nums):
-            complement = target - a
-            if a in hashmap:
-                return [i, hashmap[a]]
+        for i, val in enumerate(nums):
+            remainder = target - val
+            if remainder not in hashmap:
+                hashmap[val] = i
             else:
-                hashmap[complement] = i
-        
-        # Time: O(n) since it is a linear scan for the entire array
-        # Space: O(n) since we have a hashmap to store the index
-
-        
+                return [hashmap[remainder], i]
