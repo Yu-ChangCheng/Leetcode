@@ -4,27 +4,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        num_set = set(nums)
-        res = 0
+        if len(nums) < 1:
+            return 0
 
-        for n in num_set:
-            if n - 1 not in num_set:
-                sequence_length = 1
-                while n + 1 in num_set:
-                    sequence_length += 1
+        seen = set(nums)
+        result = 1
+
+        for n in seen:
+            if n - 1 not in seen:
+                count = 1
+                while n + 1 in seen:
+                    count += 1
                     n += 1
-                res = max(res,sequence_length)
-        return res
-
-        num_set = set(nums)
-        res = 0
-
-        for n in num_set:
-            # start a sequence
-            if n - 1 not in num_set:
-                sequence_length = 1 
-                while n + 1 in num_set:
-                    sequence_length += 1
-                    n += 1
-                res = max(res, sequence_length)
-        return res
+                result = max(result, count)
+        return result
