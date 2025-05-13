@@ -6,13 +6,15 @@ class Solution(object):
         """
         if len(s) == 0:
             return 0
+
         if len(s) == 1:
             return 1
-        
+
+        maxLength = 0
         seen = set()
         l = 0
         r = 0
-        maxLength = 0
+
         while l <= r and r < len(s):
             if s[r] not in seen:
                 seen.add(s[r])
@@ -22,5 +24,3 @@ class Solution(object):
                 seen.remove(s[l])
                 l += 1
         return maxLength
-
-
