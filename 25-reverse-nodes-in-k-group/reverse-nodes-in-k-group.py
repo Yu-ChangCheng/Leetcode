@@ -6,63 +6,29 @@
 class Solution(object):
     def reverseKGroup(self, head, k):
         """
-        :type head: ListNode
+        :type head: Optional[ListNode]
         :type k: int
-        :rtype: ListNode
+        :rtype: Optional[ListNode]
         """
         dummy = ListNode(0, head)
-        groupPrev = dummy
-
-        def getKth(curr, k):
-            while curr and k > 0:
-                curr = curr.next
-                k -= 1
-            return curr
-        
-        while True:
-            kth = getKth(groupPrev, k)
-            if not kth:
-                break
-            groupNext = kth.next
-
-            prev, curr = kth.next, groupPrev.next
-            while curr != groupNext:
-                temp = curr.next
-                curr.next = prev
-                prev = curr
-                curr = temp
-
-            temp = groupPrev.next
-            groupPrev.next = kth
-            groupPrev = temp
-        return dummy.next
-
-        dummy = ListNode(0, head)
-        groupPrev = dummy
-
-        def getKth(curr, k):
-            while curr and k > 0:
-                curr = curr.next
-                k -= 1
-            return curr
+        prev = dummy
 
         while True:
-            kth = getKth(groupPrev, k)
-            # if kth is None means there is not enough node to form a group
-            if not kth:
-                break
-            groupNext = kth.next
+            # 1) Check there are k nodes ahead
+            tail = prev
+            for _ in range(k):
+                tail = tail.next
+                if not tail:
+                    return dummy.next
 
-            # reverse group (prev is None but will split the list so kth.next is prev)
-            prev, curr = kth.next, groupPrev.next
+            # 2) Head-insertion: move each of the k–1 nodes
+            #    after prev.next up to immediately after prev
+            curr = prev.next
+            for _ in range(k-1):
+                nxt = curr.next
+                curr.next      = nxt.next     # unlink nxt
+                nxt.next       = prev.next    # splice nxt in front
+                prev.next      = nxt
 
-            while curr != groupNext:
-                temp = curr.next
-                curr.next = prev
-                prev = curr
-                curr = temp
-
-            temp = groupPrev.next
-            groupPrev.next = kth
-            groupPrev = temp
-        return dummy.next
+            # 3) Advance prev to the tail of this reversed block
+            prev = curr
