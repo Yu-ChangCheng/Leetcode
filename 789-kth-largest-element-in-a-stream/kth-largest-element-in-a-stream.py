@@ -7,7 +7,8 @@ class KthLargest(object):
         """
         self.k = k
         self.minHeap = nums
-        heapq.heapify(self.minHeap)
+        heapq.heapify(self.minHeap) # this replace in-place and won't return val so don't write self.minHeap = heapq.heapify(nums) 
+                                    # will get only None type
         while len(self.minHeap) > k:
             heapq.heappop(self.minHeap)
 
