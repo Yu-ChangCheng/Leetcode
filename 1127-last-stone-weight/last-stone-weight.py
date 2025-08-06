@@ -4,13 +4,16 @@ class Solution(object):
         :type stones: List[int]
         :rtype: int
         """
-        stones = [-s for s in stones]
-        heapq.heapify(stones)
-        while stones and len(stones) > 1:
-            first_stone = heapq.heappop(stones)
-            second_stone = heapq.heappop(stones)
-            diff = - abs(first_stone - second_stone)
-            heapq.heappush(stones, diff)
-        return -stones[0]
-            
-            
+        heap = []
+        for i in stones:
+            heapq.heappush(heap,-i)
+        
+        while len(heap) > 1:
+            num_1 = heapq.heappop(heap)
+            num_2 = heapq.heappop(heap)
+            if num_1 == num_2:
+                pass
+            else:
+                heapq.heappush(heap, num_1 - num_2) 
+
+        return -heap[0] if len(heap) > 0 else 0
